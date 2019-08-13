@@ -14,7 +14,7 @@ int main() {
 	const string HEX_INPUT = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
 
 	float best_plaintext_score = numeric_limits<float>::max();
-	string best_plaintext = "";
+	string best_plaintext;
 
 	// Check every possible byte as a key i
 	for (int i=0; i<256; i++) {

@@ -1,0 +1,5 @@
+﻿  pch.cpp
+  S1C1.cpp
+c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c1\s1c1\s1c1.cpp(31): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c1\s1c1\s1c1.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  S1C1.vcxproj -> C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C1\Debug\S1C1.exe

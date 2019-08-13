@@ -1,0 +1,6 @@
+﻿  S1C5.cpp
+c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c5\s1c5\s1c5.cpp(57): warning C4018: '<': signed/unsigned mismatch
+c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c5\s1c5\s1c5.cpp(84): warning C4018: '<': signed/unsigned mismatch
+  repeating_key_xor.cpp
+  Generating Code...
+  S1C5.vcxproj -> C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C5\Debug\S1C5.exe
