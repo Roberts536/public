@@ -21,15 +21,6 @@
     <ClCompile Include="..\..\..\..\..\openSSL\openssl-1.1.1c\ms\applink.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-test\openssl-test\decrypt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-test\openssl-test\encrypt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-test\openssl-test\handleErrors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\C++\misc\cpp-base64\base64.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

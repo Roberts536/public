@@ -72,14 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;C:\Program Files (x86)\OpenSSL\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp;C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;C:\Program Files (x86)\OpenSSL\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp;C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -93,12 +93,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\James Roberts\Documents\Cyber-crypto\openSSL\openssl-1.1.1c;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcrypto.lib;libcrypto_static.lib;libssl.lib;libssl_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcrypto.lib;libcrypto_static.lib;libssl.lib;libssl_static.lib;C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp\Win32\Output\Debug\cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,6 +128,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,7 +136,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\James Roberts\Documents\Cyber-crypto\openSSL\openssl-1.1.1c;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcrypto.lib;libcrypto_static.lib;libssl.lib;libssl_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcrypto.lib;libcrypto_static.lib;libssl.lib;libssl_static.lib;C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp\Win32\Output\Debug\cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,9 +161,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\C++\misc\cpp-base64\base64.cpp" />
     <ClCompile Include="..\..\..\..\..\openSSL\openssl-1.1.1c\ms\applink.c" />
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-test\openssl-test\decrypt.cpp" />
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-test\openssl-test\encrypt.cpp" />
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-test\openssl-test\handleErrors.cpp" />
     <ClCompile Include="S1C7.cpp" />
   </ItemGroup>
   <ItemGroup>
