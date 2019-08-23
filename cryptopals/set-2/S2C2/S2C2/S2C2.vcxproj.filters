@@ -18,10 +18,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="encrypt_ecb_block.h">
+    <ClInclude Include="..\..\..\Utilities\readThroughChars\readThroughChars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Utilities\readThroughChars\readThroughChars.h">
+    <ClInclude Include="encrypt_aes_block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Utilities\base64_decode_file\base64_decode_file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,10 +38,13 @@
     <ClCompile Include="..\..\..\..\..\C++\misc\cpp-base64\base64.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="encrypt_ecb_block.cpp">
+    <ClCompile Include="..\..\..\Utilities\readThroughChars\readThroughChars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Utilities\readThroughChars\readThroughChars.cpp">
+    <ClCompile Include="encrypt_aes_block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Utilities\base64_decode_file\base64_decode_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,5 +55,10 @@
     <Text Include="10_output.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="raw.dat">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

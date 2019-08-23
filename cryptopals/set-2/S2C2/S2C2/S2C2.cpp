@@ -2,87 +2,71 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "readThroughChars.h"
+#include "readThroughChars/readThroughChars.h"
 #include "base64.h"
-#include "encrypt_ecb_block.h"
+#include "encrypt_aes_block.h"
 #include "aes.h"
 using CryptoPP::AES;
+#include "base64_decode_file/base64_decode_file.h"
 
 typedef unsigned char byte;
 
 /*
-Programme for Set 2, Challenge 2 of the Cryptopals Challenges:
+Set 2, Challenge 2 of the Cryptopals Challenges:
 Implement AES in CBC mode.
 */
 int main()
 {
+	const std::string IN_FILE{ "10.txt" };
+	const std::string OUT_FILE{ "10_output.txt" };
+	const std::string RAW_FILE{ "raw.dat" };
 	const byte IV[16]{ 0 };
 	const byte KEY[AES::DEFAULT_KEYLENGTH+1] { "YELLOW SUBMARINE" };
 	// Trailing null character will be ignored during encryption
 
-	// Set up the input filestream
-	std::string in_filename{ "10.txt" };
-	std::ifstream inf(in_filename);
-	if (!inf)
+	// Set up the filestreams
+	base64_decode_file(IN_FILE, RAW_FILE);
+	std::ifstream rawStream(RAW_FILE);
+	if (!rawStream)
 	{
-		std::cerr << "File " << in_filename
+		std::cerr << "File " << IN_FILE
 			<< " could not be opened for reading.\n";
 		return 1;
 	}
-
-	// Set up the output filestream
-	std::string out_filename{ "10_output.txt" };
-	std::ofstream outf(out_filename);
-	if (!outf)
+	std::ofstream outStream(OUT_FILE);
+	if (!outStream)
 	{
-		std::cerr << "File " << out_filename
+		std::cerr << "File " << OUT_FILE
 			<< " could not be opened for writing.\n";
 	}
 
-	// A buffer to store raw bytes for extraction
-	std::string byteBuffer;
-
-	// A block to store the output of the last encryption
+	// Store the output of the previous encryption
 	byte addBlock[AES::BLOCKSIZE]{ *IV };
 
-	// Convert its contents to bytes (i.e. unsigned char)
-	while (inf)
+	while (rawStream)
 	{
-		// Fill up the buffer with raw bytes decoded from Base64
-		if (byteBuffer.length() < AES::BLOCKSIZE)
-		{
-			// Need at least ceil(AES::BLOCKSIZE * 4 / 3) new chars
-			// Must also be a multiple of 4 for Base64 decoding
-			std::string fourChars{ 
-				readThroughChars(&inf, 4*AES::BLOCKSIZE) };
-			byteBuffer += base64_decode(fourChars);
-		}
-
-		// Move the first AES::BLOCKSIZE bytes from buffer to array
-		char block[AES::BLOCKSIZE];
-		std::size_t length{ byteBuffer.copy(block, AES::BLOCKSIZE) };
-		if (!inf.eof())	//If EOF, buffer might be too short (& we don't need)
-			byteBuffer = byteBuffer.substr(AES::BLOCKSIZE, byteBuffer.length());
+		// Grab a block from the file
+		char rawBytes[AES::BLOCKSIZE+1];
+		rawStream.get(rawBytes, AES::BLOCKSIZE+1);
 
 		// Convert to byte type for encryption
-		byte blockBytes[AES::BLOCKSIZE];
+		byte block[AES::BLOCKSIZE];
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
-			blockBytes[i] = static_cast<byte>(block[i]);
+			block[i] = static_cast<byte>(rawBytes[i]);
 		}
 
 		// XOR with the previous encrypted block (or IV)
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
-			blockBytes[i] ^= addBlock[i];
+			block[i] ^= addBlock[i];
 		}
 
 		// Encrypt with ECB and append to file
 		byte encrypted[AES::BLOCKSIZE];
 		size_t encryptedBlocksize = 
-			encrypt_ecb_block(encrypted, blockBytes, AES::BLOCKSIZE, KEY);
+			encrypt_ecb_block(encrypted, block, AES::BLOCKSIZE, KEY);
 		memcpy(&addBlock, encrypted, AES::BLOCKSIZE);
-		outf << encrypted;
+		outStream << encrypted;
 	}
-
 }

@@ -72,14 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C5\S1C5;C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\Utilities\readThroughChars;C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C5\S1C5;C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\Utilities;C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C5\S1C5;C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\Utilities\readThroughChars;C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C5\S1C5;C:\Users\James Roberts\Documents\Cyber-crypto\C++\misc\cpp-base64;C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\Utilities;C:\Users\James Roberts\Documents\Cyber-crypto\Cryptopp;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -157,14 +157,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Utilities\base64_decode_file\base64_decode_file.h" />
     <ClInclude Include="..\..\..\Utilities\readThroughChars\readThroughChars.h" />
-    <ClInclude Include="encrypt_ecb_block.h" />
+    <ClInclude Include="encrypt_aes_block.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\C++\misc\cpp-base64\base64.cpp" />
+    <ClCompile Include="..\..\..\Utilities\base64_decode_file\base64_decode_file.cpp" />
     <ClCompile Include="..\..\..\Utilities\readThroughChars\readThroughChars.cpp" />
-    <ClCompile Include="encrypt_ecb_block.cpp" />
+    <ClCompile Include="encrypt_aes_block.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -176,6 +178,9 @@
   <ItemGroup>
     <Text Include="10.txt" />
     <Text Include="10_output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="raw.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
