@@ -1,3 +1,6 @@
-﻿  S1C7.cpp
-     Creating library C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C7\Debug\S1C7.lib and object C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C7\Debug\S1C7.exp
+﻿  base64.cpp
+c:\users\james roberts\documents\cyber-crypto\c++\misc\cpp-base64\base64.cpp(100): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+c:\users\james roberts\documents\cyber-crypto\c++\misc\cpp-base64\base64.cpp(114): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+  S1C7.cpp
+  Generating Code...
   S1C7.vcxproj -> C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C7\Debug\S1C7.exe

@@ -18,9 +18,6 @@
     <ClCompile Include="S1C7.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\openSSL\openssl-1.1.1c\ms\applink.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\C++\misc\cpp-base64\base64.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -32,6 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\C++\misc\cpp-base64\base64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S1C7.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
