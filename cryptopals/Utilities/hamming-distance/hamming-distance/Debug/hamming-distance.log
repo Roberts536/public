@@ -1,5 +1,0 @@
-﻿  hamming_distance.cpp
-c:\users\james roberts\documents\cyber-crypto\public\cryptopals\utilities\hamming-distance\hamming-distance\hamming_distance.cpp(22): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-  Generating Code...
-  hamming-distance.vcxproj -> C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\Utilities\hamming-distance\Debug\hamming-distance.exe

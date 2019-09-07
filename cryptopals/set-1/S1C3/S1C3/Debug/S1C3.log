@@ -1,9 +1,0 @@
-﻿  S1C3.cpp
-  decode_sc_xor.cpp
-c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c3\s1c3\decode_sc_xor.cpp(25): warning C4018: '<': signed/unsigned mismatch
-  english_score.cpp
-c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c3\s1c3\english_score.cpp(14): warning C4018: '<': signed/unsigned mismatch
-c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c3\s1c3\english_score.cpp(25): warning C4018: '<': signed/unsigned mismatch
-c:\users\james roberts\documents\cyber-crypto\public\cryptopals\set-1\s1c3\s1c3\english_score.cpp(36): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Generating Code...
-  S1C3.vcxproj -> C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\set-1\S1C3\Debug\S1C3.exe

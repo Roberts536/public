@@ -1,3 +1,0 @@
-﻿  base64_to_hex.cpp
-c:\users\james roberts\documents\cyber-crypto\public\cryptopals\utilities\base64_to_hex\base64_to_hex\base64_to_hex.cpp(66): warning C4244: 'argument': conversion from 'float' to 'std::streamsize', possible loss of data
-  base64_to_hex.vcxproj -> C:\Users\James Roberts\Documents\Cyber-crypto\public\cryptopals\Utilities\base64_to_hex\Debug\base64_to_hex.exe
