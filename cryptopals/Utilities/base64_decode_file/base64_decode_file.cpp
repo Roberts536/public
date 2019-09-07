@@ -18,7 +18,8 @@ void base64_decode_file(std::string source, std::string dest)
 		std::cerr << "Error while opening file: " << source
 			<< " for reading.\n";
 	}
-	std::ofstream outf(dest);
+	std::ofstream outf(dest, 
+		std::ios_base::out | std::ios_base::binary);
 	if(!outf)
 	{
 		std::cerr << "Error while opening file: " << dest
