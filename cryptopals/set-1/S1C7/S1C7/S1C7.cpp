@@ -7,6 +7,8 @@ Decrypt a file with AES in ECB mode and a known key.
 int main(int argc, char* argv[])
 {
 	AutoSeededRandomPool prng;
+	const std::string in_filename{ "7.txt" };
+	const std::string binary_filename{ "raw.bin" };
 
 	// Use the key given by Cryptopals
 	const char key_text[]{ "YELLOW SUBMARINE" };
@@ -18,8 +20,7 @@ int main(int argc, char* argv[])
 
 	string cipher, recovered;
 
-	// Open the ciphertext input filestream
-	std::string in_filename{ "7.txt" };
+	// Open the filestreams
 	std::ifstream inf(in_filename);
 	// If there's a problem opening the ifstream
 	if (!inf)
@@ -27,7 +28,16 @@ int main(int argc, char* argv[])
 		// Tell the user the problem, and exit
 		std::cerr << "Could not open file: "
 			<< in_filename << " for reading.\n";
-		return 1;
+		std::exit(1);
+	}
+	std::ofstream binf(binary_filename,
+		std::ios_base::out | std::ios_base::binary);
+	if (!binf)
+	{
+		// Tell the user the problem and exit
+		std::cerr << "Could not open file: "
+			<< binary_filename << " for reading.\n";
+		std::exit(1);
 	}
 
 	// Keep pulling input from the file while we can
@@ -37,8 +47,10 @@ int main(int argc, char* argv[])
 		string line;
 		getline(inf, line);
 
-		// Decrypt (uses 3rd party stuff) and add to sstream
-		cipher += base64_decode(line);
+		// Decrypt (uses 3rd party stuff) and add to string & binary file
+		std::string decoded{ base64_decode(line) };
+		cipher += decoded;
+		binf << decoded;
 	}
 
 	// Decrypt
