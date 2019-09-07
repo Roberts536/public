@@ -9,6 +9,7 @@
 #include "readThroughChars/readThroughChars.h"
 #include "base64_decode_file/base64_decode_file.h"
 #include "base64.h"
+#include "cryptoUtils.h"
 
 #include "osrng.h"
 using CryptoPP::AutoSeededRandomPool;
@@ -26,3 +27,4 @@ using CryptoPP::StreamTransformationFilter;
 using CryptoPP::AES;
 #include "modes.h"
 using CryptoPP::ECB_Mode;
+
