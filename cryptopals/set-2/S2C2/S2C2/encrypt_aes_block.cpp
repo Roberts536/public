@@ -25,3 +25,23 @@ size_t encrypt_ecb_block(byte* dest, const byte* block, const size_t blockSize ,
 
 	return blockSize;
 }
+
+/*
+Decrypts a block to dest using AES in ECB mode.
+Assumes the key length is AES::DEFAULT_KEYLENGTH
+*/
+size_t decrypt_ecb_block(byte* dest, const byte* block, const size_t blockSize, const byte *key)
+{
+	try
+	{
+		ECB_Mode<AES>::Decryption ecbDecryption(key, AES::DEFAULT_KEYLENGTH);
+		ecbDecryption.ProcessData(dest, block, blockSize);
+	}
+	catch (const CryptoPP::Exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		std::exit(1);
+	}
+
+	return blockSize;
+}

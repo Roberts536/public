@@ -13,9 +13,7 @@ std::string readThroughChars(std::ifstream *inf, int num, char delim)
 {
 	// Check that the filestream is okay
 	if (!(*inf))
-	{
 		std::cerr << "Filestream is not good.";
-	}
 
 	// Protect against negative input
 	if (num < 0)

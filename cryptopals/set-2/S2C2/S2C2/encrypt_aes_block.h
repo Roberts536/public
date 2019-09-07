@@ -20,3 +20,4 @@ using CryptoPP::AES;
 using CryptoPP::ECB_Mode;
 
 size_t encrypt_ecb_block(byte* dest, const byte* block, const size_t blockSize, const byte *key);
+size_t decrypt_ecb_block(byte* dest, const byte* block, const size_t blockSize, const byte *key);

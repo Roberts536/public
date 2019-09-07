@@ -1,14 +1,5 @@
-//#include "pch.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include "readThroughChars/readThroughChars.h"
-#include "base64.h"
-#include "encrypt_aes_block.h"
-#include "aes.h"
+#include "S2C2.h"
 using CryptoPP::AES;
-#include "base64_decode_file/base64_decode_file.h"
-
 typedef unsigned char byte;
 
 /*
@@ -17,56 +8,98 @@ Implement AES in CBC mode.
 */
 int main()
 {
-	const std::string IN_FILE{ "10.txt" };
-	const std::string OUT_FILE{ "10_output.txt" };
-	const std::string RAW_FILE{ "raw.dat" };
+	const std::size_t FIELD_WIDTH{ 3 };
+	const std::string IN_FILE{ "S2C2/7.txt" };
+	const std::string OUT_FILE{ "S2C2/7_output.txt" };
+	const std::string RAW_FILE{ "S2C2/raw.bin" };
 	const byte IV[16]{ 0 };
 	const byte KEY[AES::DEFAULT_KEYLENGTH+1] { "YELLOW SUBMARINE" };
 	// Trailing null character will be ignored during encryption
 
 	// Set up the filestreams
 	base64_decode_file(IN_FILE, RAW_FILE);
-	std::ifstream rawStream(RAW_FILE);
+	std::ifstream rawStream(RAW_FILE, std::ios_base::in | std::ios_base::binary);
 	if (!rawStream)
 	{
-		std::cerr << "File " << IN_FILE
-			<< " could not be opened for reading.\n";
-		return 1;
+		std::cerr << "Error while opening file: " << RAW_FILE
+			<< " for reading.\n";
 	}
 	std::ofstream outStream(OUT_FILE);
 	if (!outStream)
 	{
-		std::cerr << "File " << OUT_FILE
-			<< " could not be opened for writing.\n";
+		std::cerr << "Error while opening file: " << OUT_FILE
+			<< " for writing.\n";
 	}
+
+	// Create the decryption object
+	ECB_Mode<AES>::Decryption ecbDecryption(KEY, AES::DEFAULT_KEYLENGTH);
 
 	// Store the output of the previous encryption
 	byte addBlock[AES::BLOCKSIZE]{ *IV };
+	char rawBytes[AES::BLOCKSIZE];
 
 	while (rawStream)
 	{
-		// Grab a block from the file
-		char rawBytes[AES::BLOCKSIZE+1];
-		rawStream.get(rawBytes, AES::BLOCKSIZE+1);
+		for (int i = 0; i < AES::BLOCKSIZE; i++)
+		{
+			rawBytes[i] = rawStream.get();
+		}
 
-		// Convert to byte type for encryption
-		byte block[AES::BLOCKSIZE];
+		//rawStream.get(rawBytes, AES::BLOCKSIZE + 1)
+		
+		// Convert to byte type for decryption
+		byte block[AES::BLOCKSIZE]{ 0 };
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
 			block[i] = static_cast<byte>(rawBytes[i]);
 		}
 
+		/*
 		// XOR with the previous encrypted block (or IV)
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
 			block[i] ^= addBlock[i];
 		}
+		*/
 
-		// Encrypt with ECB and append to file
-		byte encrypted[AES::BLOCKSIZE];
-		size_t encryptedBlocksize = 
-			encrypt_ecb_block(encrypted, block, AES::BLOCKSIZE, KEY);
-		memcpy(&addBlock, encrypted, AES::BLOCKSIZE);
-		outStream << encrypted;
+		// Decrypt with ECB
+		byte decrypted[AES::BLOCKSIZE];
+		try
+		{
+			ecbDecryption.ProcessData(decrypted, block, AES::BLOCKSIZE);
+			memcpy(&addBlock, decrypted, AES::BLOCKSIZE);
+		}
+		catch (const CryptoPP::Exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+			std::exit(1);
+		}
+		
+		// Convert back to char and append to file
+		std::cout << "\n";
+		for (int i = 0; i < AES::BLOCKSIZE; i++)
+		{
+			byte letter{ decrypted[i] };
+			if (isalpha(letter) || letter == ' ')
+			{
+				std::cout << std::setfill(' ')
+					<< std::setw(FIELD_WIDTH) 
+					<< static_cast<char>(letter);
+			}
+			else
+			{
+				std::cout << std::setfill(' ')
+					<< std::setw(FIELD_WIDTH) 
+					<< "*";
+			}
+			
+		}
 	}
+	if (rawStream.fail())
+	{
+		std::cerr << "\nFailbit set. Number of characters read: "
+			<< rawStream.gcount();
+	}
+
+	return 0;
 }
