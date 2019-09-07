@@ -14,7 +14,6 @@ int main()
 	const std::string RAW_FILE{ "S2C2/raw.bin" };
 	const byte IV[16]{ 0 };
 	const byte KEY[AES::DEFAULT_KEYLENGTH+1] { "YELLOW SUBMARINE" };
-	// Trailing null character will be ignored during encryption
 
 	// Set up the filestreams
 	base64_decode_file(IN_FILE, RAW_FILE);
@@ -31,13 +30,12 @@ int main()
 			<< " for writing.\n";
 	}
 
-	// Create the decryption object
+	// Set up for ECB Decryption
 	ECB_Mode<AES>::Decryption ecbDecryption(KEY, AES::DEFAULT_KEYLENGTH);
-
-	// Store the output of the previous encryption
 	byte addBlock[AES::BLOCKSIZE]{ *IV };
 	char rawBytes[AES::BLOCKSIZE];
 
+	// Read raw bytes, decrypt and output
 	while (rawStream)
 	{
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
@@ -45,7 +43,9 @@ int main()
 			rawBytes[i] = rawStream.get();
 		}
 
-		//rawStream.get(rawBytes, AES::BLOCKSIZE + 1)
+		// Break if the EOF has been reached
+		if (rawStream.eof())
+			break;
 		
 		// Convert to byte type for decryption
 		byte block[AES::BLOCKSIZE]{ 0 };
@@ -75,30 +75,21 @@ int main()
 			std::exit(1);
 		}
 		
-		// Convert back to char and append to file
-		std::cout << "\n";
+		// Output
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
 			byte letter{ decrypted[i] };
-			if (isalpha(letter) || letter == ' ')
+			if (isprint(letter) || letter == '\n')
 			{
-				std::cout << std::setfill(' ')
-					<< std::setw(FIELD_WIDTH) 
-					<< static_cast<char>(letter);
+				std::cout << letter;
+				outStream << letter;
 			}
 			else
 			{
-				std::cout << std::setfill(' ')
-					<< std::setw(FIELD_WIDTH) 
-					<< "*";
+				std::cout << '.';
+				outStream << '.';
 			}
-			
 		}
-	}
-	if (rawStream.fail())
-	{
-		std::cerr << "\nFailbit set. Number of characters read: "
-			<< rawStream.gcount();
 	}
 
 	return 0;
