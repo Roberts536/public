@@ -14,7 +14,6 @@ const char BASE64_LOOKUP[64]{
 		'y', 'z', '0', '1', '2',
 		'3', '4', '5', '6', '7',
 		'8', '9', '+', '/' };
-std::string result;
 
 /*
 Helper function. Coverts a block into a bitset.
@@ -46,6 +45,7 @@ std::string base64_encode(const std::string input)
 	// Base64 encodes bytes in blocks of three bytes
 	int numBlocks{ (int) ceilf(input.size() / (float)MAX_BLOCK_SIZE) };
 
+	std::string result;
 	for (int i = 0; i < numBlocks; i++)
 	{
 		std::string block{ input.substr(i * MAX_BLOCK_SIZE, MAX_BLOCK_SIZE) };
