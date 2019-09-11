@@ -20,9 +20,9 @@ std::string result;
 Helper function. Coverts a block into a bitset.
 E.g. 'aaa' -> <01100001 01100001 01100001>
 */
-void blockToBitset(const std::string &block, std::bitset<MAX_BLOCK_SIZE_BITS> &outBits)
+std::bitset<MAX_BLOCK_SIZE_BITS> blockToBitset(const std::string block)
 {
-	outBits.reset();
+	std::bitset<MAX_BLOCK_SIZE_BITS> outBits(0);
 	for (int j = 0; j < MAX_BLOCK_SIZE; j++)
 	{
 		// The last block could be shorter
@@ -35,6 +35,7 @@ void blockToBitset(const std::string &block, std::bitset<MAX_BLOCK_SIZE_BITS> &o
 		if (j < MAX_BLOCK_SIZE - 1)
 			outBits <<= 8;
 	}
+	return outBits;
 }
 
 /*
@@ -48,8 +49,7 @@ std::string base64_encode(const std::string input)
 	for (int i = 0; i < numBlocks; i++)
 	{
 		std::string block{ input.substr(i * MAX_BLOCK_SIZE, MAX_BLOCK_SIZE) };
-		std::bitset<MAX_BLOCK_SIZE_BITS> blockBits;
-		blockToBitset(block, blockBits);
+		std::bitset<MAX_BLOCK_SIZE_BITS> blockBits{ blockToBitset(block) };
 
 		// Base64 characters are read off 6 bits at a time
 		std::bitset<6> base64_char_bits;
