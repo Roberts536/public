@@ -8,12 +8,11 @@ Uses AES default key length and block size.
 Message length must be a multiple of block size.
 */
 void decryptFile(
-	const AES_MODE AES_ECB,
+	const AES_MODE mode,
 	const std::string sourceFile,
 	const std::string destFile,
 	const byte* key)
 {
-	// Set up the filestreams
 	std::ifstream rawStream(sourceFile, std::ios_base::in 
 							| std::ios_base::binary);
 	if (!rawStream)
@@ -28,12 +27,10 @@ void decryptFile(
 			<< destFile	<< " for writing.\n";
 	}
 
-	// Set up for ECB Decryption
-	ECB_Mode<AES>::Decryption ecbDecryption(
+	ECB_Mode<AES>::Decryption decryption(
 		key, AES::DEFAULT_KEYLENGTH);
 	char rawBytes[AES::BLOCKSIZE];
 
-	// Read raw bytes, decrypt and output
 	while (rawStream)
 	{
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
@@ -41,22 +38,20 @@ void decryptFile(
 			rawBytes[i] = rawStream.get();
 		}
 
-		// Break if the EOF has been reached
 		if (rawStream.eof())
 			break;
 
-		// Convert to byte type for decryption
+		// Decryption object only accepts unsigned types
 		byte block[AES::BLOCKSIZE]{ 0 };
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
 			block[i] = static_cast<byte>(rawBytes[i]);
 		}
 
-		// Decrypt with ECB
 		byte decrypted[AES::BLOCKSIZE];
 		try
 		{
-			ecbDecryption.ProcessData(
+			decryption.ProcessData(
 				decrypted,
 				block,
 				AES::BLOCKSIZE
@@ -68,7 +63,6 @@ void decryptFile(
 			std::exit(1);
 		}
 
-		// Output
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
 			byte letter{ decrypted[i] };
