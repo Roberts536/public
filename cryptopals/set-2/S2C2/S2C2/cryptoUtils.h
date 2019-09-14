@@ -21,4 +21,15 @@ using CryptoPP::AES;
 #include "modes.h"
 using CryptoPP::ECB_Mode;
 
-void ECBDecrypt(std::string source, std::string dest, byte* key);
+enum AES_MODE
+{
+	AES_ECB,
+	AES_CBC,
+};
+
+void decryptFile(
+	const AES_MODE mode,
+	const std::string sourceFile,
+	const std::string destFile,
+	const byte* key
+);

@@ -7,24 +7,30 @@ Decrypts a binary file using AES in ECB mode.
 Uses AES default key length and block size.
 Message length must be a multiple of block size.
 */
-void ECBDecrypt(std::string source, std::string dest, byte* key)
+void decryptFile(
+	const AES_MODE AES_ECB,
+	const std::string sourceFile,
+	const std::string destFile,
+	const byte* key)
 {
 	// Set up the filestreams
-	std::ifstream rawStream(source, std::ios_base::in | std::ios_base::binary);
+	std::ifstream rawStream(sourceFile, std::ios_base::in 
+							| std::ios_base::binary);
 	if (!rawStream)
 	{
-		std::cerr << "Error while opening file: " << source
-			<< " for reading.\n";
+		std::cerr << "Error while opening file: " 
+			<< sourceFile << " for reading.\n";
 	}
-	std::ofstream outStream(dest);
+	std::ofstream outStream(destFile);
 	if (!outStream)
 	{
-		std::cerr << "Error while opening file: " << dest
-			<< " for writing.\n";
+		std::cerr << "Error while opening file: " 
+			<< destFile	<< " for writing.\n";
 	}
 
 	// Set up for ECB Decryption
-	ECB_Mode<AES>::Decryption ecbDecryption(key, AES::DEFAULT_KEYLENGTH);
+	ECB_Mode<AES>::Decryption ecbDecryption(
+		key, AES::DEFAULT_KEYLENGTH);
 	char rawBytes[AES::BLOCKSIZE];
 
 	// Read raw bytes, decrypt and output
@@ -50,7 +56,11 @@ void ECBDecrypt(std::string source, std::string dest, byte* key)
 		byte decrypted[AES::BLOCKSIZE];
 		try
 		{
-			ecbDecryption.ProcessData(decrypted, block, AES::BLOCKSIZE);
+			ecbDecryption.ProcessData(
+				decrypted,
+				block,
+				AES::BLOCKSIZE
+			);
 		}
 		catch (const CryptoPP::Exception& e)
 		{

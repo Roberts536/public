@@ -22,7 +22,7 @@ int main()
 
 	// Decrypt
 	base64_decode_file(IN_FILE, RAW_FILE);
-	ECBDecrypt(RAW_FILE, OUT_FILE, KEY);
+	decryptFile(AES_ECB, RAW_FILE, OUT_FILE, KEY);
 
 	return 0;
 }
