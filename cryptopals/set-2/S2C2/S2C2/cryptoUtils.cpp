@@ -23,8 +23,10 @@ void decryptFile(
 	const byte* key,
 	const byte* IV)
 {
-	std::ifstream rawStream(sourceFile, std::ios_base::in
-		| std::ios_base::binary);
+	std::ifstream rawStream(
+		sourceFile, std::ios_base::in
+		| std::ios_base::binary
+	);
 	if (!rawStream)
 	{
 		std::cerr << "Error while opening file: "
@@ -49,7 +51,6 @@ void decryptFile(
 		// will stop if a delimiting char is encountered
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 			rawBytes[i] = rawStream.get();
-
 		if (rawStream.eof())
 			break;
 
@@ -57,7 +58,6 @@ void decryptFile(
 		byte block[AES::BLOCKSIZE]{ 0 };
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 			block[i] = static_cast<byte>(rawBytes[i]);
-
 		byte decrypted[AES::BLOCKSIZE];
 		try
 		{
@@ -72,13 +72,11 @@ void decryptFile(
 			std::cerr << e.what() << std::endl;
 			std::exit(1);
 		}
-
 		if (mode == AES_CBC)
 		{
 			addAESBlock(previousBlock, decrypted);
 			memcpy(previousBlock, block, AES::BLOCKSIZE);
 		}
-
 		for (int i = 0; i < AES::BLOCKSIZE; i++)
 		{
 			byte letter{ decrypted[i] };
@@ -94,5 +92,4 @@ void decryptFile(
 			}
 		}
 	}
-	
 }

@@ -8,22 +8,29 @@ Implement AES decryption in CBC mode.
 */
 int main()
 {
-	const std::size_t FIELD_WIDTH{ 3 };
 	const std::string IN_FILE{ "S2C2/10.txt" };
 	const std::string OUT_FILE{ "S2C2/10_output.txt" };
 	const std::string RAW_FILE{ "S2C2/raw.bin" };
-	const AES_MODE mode{ AES_CBC };
+	const std::string KEY_STRING{ "YELLOW SUBMARINE" };
+
+	if (KEY_STRING.length() != AES::DEFAULT_KEYLENGTH)
+	{
+		std::cerr << "Error: key " << KEY_STRING
+			<< " does not have length "
+			<< AES::DEFAULT_KEYLENGTH;
+		exit(1);
+	}
 
 	// Key and IV arrays should not have null terminators
 	byte KEY[AES::DEFAULT_KEYLENGTH]{};
 	for (int i=0; i<AES::DEFAULT_KEYLENGTH; i++)
-		KEY[i] = "YELLOW SUBMARINE"[i];
+		KEY[i] = KEY_STRING[i];
 	byte IV[AES::BLOCKSIZE]{};
 	IV[AES::BLOCKSIZE-1] = 0;
 
 	// Decrypt
 	base64_decode_file(IN_FILE, RAW_FILE);
-	decryptFile(mode, RAW_FILE, OUT_FILE, KEY, IV);
+	decryptFile(AES_CBC, RAW_FILE, OUT_FILE, KEY, IV);
 
 	return 0;
 }
