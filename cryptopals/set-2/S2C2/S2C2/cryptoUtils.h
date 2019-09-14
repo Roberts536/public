@@ -31,5 +31,6 @@ void decryptFile(
 	const AES_MODE mode,
 	const std::string sourceFile,
 	const std::string destFile,
-	const byte* key
+	const byte* key,
+	const byte* IV
 );
