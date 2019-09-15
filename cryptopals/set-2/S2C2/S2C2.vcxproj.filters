@@ -54,12 +54,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="S2C2\10_output.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="S2C2\10.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="S2C2\7_test.txt">
       <Filter>Resource Files</Filter>
     </Text>
@@ -67,6 +61,12 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="S2C2\7.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="S2C2\10.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="S2C2\10_output.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
