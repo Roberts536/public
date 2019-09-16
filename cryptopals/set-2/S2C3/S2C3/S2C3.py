@@ -8,15 +8,12 @@ key = os.urandom(32)
 iv = os.urandom(16)
 
 ciphertext = AESUtils.encrypt(
-                key,
-                iv,
-                message)
+    mode, key, iv, message)
 print(
     "The encrypted message: " 
     + str(ciphertext)
     )
 
 plaintext = AESUtils.decrypt(
-                key,
-                ciphertext)
+                key, ciphertext)
 print("The plaintext: " + str(plaintext))
