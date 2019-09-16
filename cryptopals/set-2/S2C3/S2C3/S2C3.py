@@ -11,5 +11,5 @@ ciphertext = AESUtils.encrypt(
     mode, key, iv, message)
 print("The encrypted message: " + str(ciphertext))
 
-plaintext = AESUtils.decrypt(key, ciphertext)
+plaintext = AESUtils.decrypt(mode, key, ciphertext)
 print("The plaintext: " + plaintext.decode('utf-8'))
