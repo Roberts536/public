@@ -23,11 +23,11 @@ def encrypt(mode, key, iv, inputBytes):
     ct = bytes(buf[:lenEncrypted]) + encryptor.finalize()
     return ct
 
-def decrypt(key, ct):
+def decrypt(mode, key, ct):
     backend = default_backend()
     decryptor = Cipher(
         algorithms.AES(key),
-        modes.ECB(),
+        mode,
         backend=backend
         ).decryptor()
     return decryptor.update(ct) + decryptor.finalize()
