@@ -1,4 +1,6 @@
 /* 
+ * This demo follows the walkthrough on TutorialsPoint and is not my own work.
+ *
  * In the Factory Pattern, we create an object without exposing the creation 
  * logic to the client and refer to the newly created object using a common 
  * interface.
