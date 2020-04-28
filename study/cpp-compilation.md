@@ -72,4 +72,4 @@ CMake doesn't always default to the latest version of C++, so you might want to 
 
 Remember that CMake just generates the build scripts; you have to run `make` in the `build` directory afterwards to actually build your system!
 
-If you're using Python and it can't find the files, you may be using the Windows version of Python. See this answer: https://stackoverflow.com/questions/15334201/correct-path-usage-in-cygwin-difference-between-python-c-somefile-py-pyt . You can install the `python37` and `python37-pip` packages from the Cygwin installer. You'll then need to run CMake with the flat `-DPYTHON_EXECUTABLE="[path to python executable]"`
+If you're using Python and it can't find the files, you may be using the Windows version of Python. See this answer: https://stackoverflow.com/questions/15334201/correct-path-usage-in-cygwin-difference-between-python-c-somefile-py-pyt . You can install the `python37` and `python37-pip` packages from the Cygwin installer. You'll then need to run CMake with the flag `-DPYTHON_EXECUTABLE="[path to python executable]"`. You may also need to put `find_package (Python3 COMPONENTS Interpreter Development)` in your `CMakeLists.txt`.
