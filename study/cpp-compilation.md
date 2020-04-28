@@ -53,6 +53,23 @@ Make sure you have the C/C++ extension and the CMake Tools extension installed b
 * Press F5 to run the launch task.
 * Note that you shouldn't need `tasks.json` or `cpp_properties.json`, because you can set all of the settings (like compiler location) in the `CMakeLists.txt`.
 
+### Misc
+* From within the `build` folder, you can see CMake cached variables by running `cmake -L -N .`. CMake stores variables in the cache if they are expected to stay constant or are expensive to compute, such as the generator.
+* There is a GUI version and a console version of CMake, which you can open with the commands `cmake-gui` and `ccmake` respectively.
+* There is a good CMake walkthrough on https://preshing.com/20170511/how-to-build-a-cmake-based-project/
+
 ### Debugging
 * Beware that once CMake runs once with one compiler, it will ignore options like `set(CMAKE_CXX_COMPILER_ID MSVC)` in the `CMakeLists.txt`, so you have to find another way to change the compiler.
-* If you use `#include <filesystem>` and compile with MSVC, you may need to `#include <functional>` right below it. The `functional` library concerns function objects, which are objects that behave like functions.
+* If your C++ program uses system headers that are specific to an OS (like `unistd.h` is specific to UNIX systems), you will need to find a port of those headers for the host system. For example, Cygwin has ports of the UNIX headers. You'll need to use CMake from within Cygwin to do this. See the answer here for an overview of Cygwin: https://stackoverflow.com/questions/771756/what-is-the-difference-between-cygwin-and-mingw?rq=1
+
+### Using Cygwin
+
+If you need Linux utilities like header files, you'll need to run CMake within Cygwin.
+
+Download the Cygwin installer and ensure `cmake` and `make` packages are selected (if you already have Cygwin installed, it will just update existing packages and add the new ones). You might also want to install the packages for `gdb` so that you can run the program once it's built.
+
+CMake doesn't always default to the latest version of C++, so you might want to do `set (CMAKE_CXX_STANDARD 17)` in your root `CMakeLists.txt` to ensure all of your language features work as expected.
+
+Remember that CMake just generates the build scripts; you have to run `make` in the `build` directory afterwards to actually build your system!
+
+If you're using Python and it can't find the files, you may be using the Windows version of Python. See this answer: https://stackoverflow.com/questions/15334201/correct-path-usage-in-cygwin-difference-between-python-c-somefile-py-pyt . You can install the `python37` and `python37-pip` packages from the Cygwin installer. You'll then need to run CMake with the flat `-DPYTHON_EXECUTABLE="[path to python executable]"`
