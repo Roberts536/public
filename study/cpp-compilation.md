@@ -45,7 +45,7 @@ Overall settings for the project, such as whether to configure the project when 
 * `${workspaceFolder}` - the path of the folder opened in VS Code
 * `${cwd}` - the task runner's current working directory on startup
 
-You can also reference environment variables through the `${env:Name}` syntax (for example, `${env:USERNAME}`).
+You can also reference environment variables through the `${env:Name}` syntax (for example, `${env:USERNAME}`). The following page contains more variables: https://code.visualstudio.com/docs/editor/variables-reference
 
 ## Using CMake
 The purpose of CMake is to manage the build process in a compiler-independent manner. CMake will create build files appropriate to the host, e.g. Makefiles on UNIX and projects/workspaces for MSVC (From: https://cmake.org/overview/), though of course you are free to build for systems other than your own.
