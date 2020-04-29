@@ -5,6 +5,7 @@ Part 2 of a summary of *Clean Architecture* by Robert C. Martin.
 ## Object-oriented programming (OOP)
 
 OOP is traditionally defined as programming that uses encapsulation, inheritance and polymorphism. However:
+
 * Encapsulation already existed before OOP - see `struct` in C
 * Inheritance already existed, albeit via casting
 

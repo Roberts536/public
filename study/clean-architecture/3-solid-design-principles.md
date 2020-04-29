@@ -4,7 +4,7 @@ Part 3 of a summary of *Clean Architecture* by Robert C. Martin.
 
 ## Single Responsibility
 
-Each component has only one reason to change. 
+Each component has only one reason to change.
 
 Many misunderstand this to mean that a component should only do one thing. In fact, it would be more accurate to say that a component should *only be accountable to one stakeholder group*.
 
@@ -48,6 +48,7 @@ At its most extreme, this means that all dependencies are via interfaces. In pra
 Another way to see the principle is that the flow of dependency is in the opposite direction to the flow of control.
 
 A few rules of thumb:
-- Design interfaces carefully and be reluctant to change them, because a lot depends on them.
-- Don't refer to volatile concrete classes, or override them. Obeying this rule often means using an abstract factory.
-- Don't derive from volatile concrete classes; inheritance is a strong dependency.
+
+* Design interfaces carefully and be reluctant to change them, because a lot depends on them.
+* Don't refer to volatile concrete classes, or override them. Obeying this rule often means using an abstract factory.
+* Don't derive from volatile concrete classes; inheritance is a strong dependency.
