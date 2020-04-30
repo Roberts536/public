@@ -52,11 +52,11 @@ This problem becomes greater as the size of the project increases.
 
 Deal with the problem by:
 
-- Divide the system into components, and assign each component to one team
-- Developers release components when they like, and other teams adopt them when they like
-- Draw the dependency diagram as a directed acyclic graph. Then:
-  - Follow the arrows back to find affected components for testing
-  - Start at the leaves and work backwards when building and testing the whole system
+- Dividing the system into components, and assigning each component to one team
+- Allowing developers to release components when they like, and other teams to adopt them when they like
+- Drawing the dependency diagram as a directed acyclic graph, then:
+  - Following the arrows back to find affected components for testing
+  - Starting at the leaves and work backwards when building and testing the whole system
 
 If you find yourself including many libraries and components to write a simple test, you may have a cycle in your graph.
 
@@ -88,3 +88,17 @@ When many components depend on a component, that component becomes more position
 ### The Stable Abstractions Principle (SAP)
 
 *A component should be as abstract as it is stable.*
+
+It should be obvious now that policy decisions should be in stable components, isolated from volatility. However, just because the policies are stable, doesn't mean the code implementing them should be hard to change. We want the policy components to be *easy to extend but difficult to modify* - an analogue of the Open-Closed Principle (OCP) but for components. This is the Stable Abstractions Principle.
+
+The SAP and the SDP combined are the analogue of the DIP for components:
+
+* The SDP says that dependency runs in the direction of stability
+* The SAP says that stability implies abstraction
+
+However components, unlike classes, can be partially abstract and partially concrete. We can measure the abstractness of a component as the percentage of its classes which are abstract classes or interfaces.
+
+Deviating from the SAP leads to either the *Zone of Pain* or the *Zone of Uselessness*:
+
+* The *Zone of Pain* is for stable, concrete classes. You can't extend them because they are concrete, and they are hard to change because of their dependencies. A notorious example is database schemas.
+* The *Zone of Uselessness* is for abstract classes with no dependencies.
