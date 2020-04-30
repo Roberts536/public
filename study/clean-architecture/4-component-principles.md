@@ -98,7 +98,15 @@ The SAP and the SDP combined are the analogue of the DIP for components:
 
 However components, unlike classes, can be partially abstract and partially concrete. We can measure the abstractness of a component as the percentage of its classes which are abstract classes or interfaces.
 
-Deviating from the SAP leads to either the *Zone of Pain* or the *Zone of Uselessness*:
+#### Deviating from the SAP
+
+Having an appropriate amount of abstractness for a component's stability is called being on the *Main Sequence*. Deviating from the main sequence leads to either the *Zone of Pain* or the *Zone of Uselessness*:
 
 * The *Zone of Pain* is for stable, concrete classes. You can't extend them because they are concrete, and they are hard to change because of their dependencies. A notorious example is database schemas.
 * The *Zone of Uselessness* is for abstract classes with no dependencies.
+
+The more volatile a component, the more important it is to keep it away from these zones. If a library is not volatile, it is less important. For example, the `String` library is very stable, but is not volatile, so it doesn't matter that it is concrete.
+
+Life is easier and simpler if components are either stable and abstract or unstable and concrete. Components that fall inbetween are more difficult to manage.
+
+The extent of deviation can be measured as D = |A + I - 1| where I is 1 minus the stability. A deviation of zero means that the component is on the main sequence. This metric allows us to programmatically analyse all the components in a system to see which are the worst offenders. You can also investigate which releases increased the deviation of a component the most.
