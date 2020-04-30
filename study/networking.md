@@ -5,6 +5,7 @@
 Notes from:
 * https://www.youtube.com/watch?v=g7mroO_BLD0 
 * https://www.cloudflare.com/learning/dns/what-is-recursive-dns/
+* https://ns1.com/resources/dns-types-records-servers-and-queries
 
 DHCP stands for *Dynamic Host Configuration Protocol*. It's a way to dynamically assign IP addresses to devices on IP networks.
 
@@ -26,6 +27,15 @@ The IP address is the dynamic piece of information. The others are static.
 * You can set up static IP addresses outside the scope, or use reservations within the scope
 
 *Recursive DNS* is where the server communicates with several other (upstream) DNS servers to resolve an address. This is in contrast to *Iterative DNS* in which the client queries each DNS server in turn. RDNSS = recursive DNS server.
+
+There are a few types of DNS records:
+
+* `A` is an Address Mapping Record, which maps a name to an IPv4 address
+* `AAAA` is the same for IPv6
+* `CNAME` is a Canonical Name, which aliases one hostname for another
+* `PTR` is a Reverse look-up pointer record, which is for obtaining a name from an IP address
+
+More here: https://ns1.com/resources/dns-types-records-servers-and-queries
 
 ## Default Gateway
 
