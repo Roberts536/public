@@ -29,3 +29,11 @@ The most costly aspect of a software system. Good architecture minimises both th
 A software system consists of *policy* and *details*. Good architecture recognises the importance of policy, and tries to decouple the details from the policy as much as possible. Doing so allows us to *delay implementation decisions* so that we can make them later with better information. This applies even if you think the decision has already been made.
 
 *A good architect maximises the number of decisions not made.*
+
+## 16-22 To do
+
+## 23 Presenters and Humble Objects
+
+The *Humble Object Pattern* consists of stripping out the hard-to-test elements of a class into a separate module, called the Humble object.
+
+For example, a GUI screen is hard to test, but the rest of the logic might be easier to test. So we separate the GUI into two modules: the *Presenter* and the *View*.
